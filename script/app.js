@@ -1,5 +1,35 @@
-function loadSVG () {
-    fetch("city.svg")
+window.addEventListener("load", () => {
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    let aboutheading = document.getElementById("#about-head");
+
+    let about_split = new SplitText("#about-head", {
+        type: 'chars'
+    })
+
+    let about_heading_timeline = gsap.timeline({
+        scrollTrigger:{
+            trigger: "#about",
+            start: "bottom top",
+            end: "+=300",
+            // scrub: true,
+            markers: true,
+        }
+    })
+
+    about_heading_timeline.fromTo(
+        about_split.chars, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
+
+    function loadSVG () {
+    fetch("./assets/city.svg")
     .then((response) => { return response.text();})
     .then((svg) => {
         document.getElementById('bg_city').innerHTML = svg;
@@ -9,7 +39,7 @@ function loadSVG () {
 }
 loadSVG();
 function setAnimationScroll () {
-    gsap.registerPlugin(ScrollTrigger);
+
     let runAnimation = gsap.timeline({
         scrollTrigger: {
             trigger: "#bg_city",
@@ -59,3 +89,11 @@ function setAnimationScroll () {
         })
     ]);
 }
+})
+
+
+
+// Initialize Lenis
+const lenis = new Lenis({
+  autoRaf: true,
+});
