@@ -1,7 +1,8 @@
 window.addEventListener("load", () => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
     let aboutheading = document.getElementById("#about-head");
-
+    let elements = document.getElementsByClassName("feature-con");
+    console.log(elements)
     let about_split = new SplitText("#about-head", {
         type: 'chars'
     })
@@ -89,6 +90,26 @@ function setAnimationScroll () {
         })
     ]);
 }
+
+let feature_timeline = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#features",
+        start: "bottom top",
+        end: "+=800",
+        markers: true,
+    }
+})
+
+feature_timeline.fromTo(
+    elements,{
+        y: -200,
+        opacity: 0
+    },{
+        y: 0,
+        opacity: 1,
+    }
+    )
+
 })
 
 
