@@ -13,7 +13,6 @@ window.addEventListener("load", () => {
             start: "bottom top",
             end: "+=300",
             // scrub: true,
-            markers: true,
         }
     })
 
@@ -96,7 +95,7 @@ let feature_timeline = gsap.timeline({
         trigger: "#features",
         start: "bottom top",
         end: "+=800",
-        markers: true,
+
     }
 })
 
@@ -231,6 +230,31 @@ const track = document.querySelector('.slider-track');
 
             // Recalculate on window resize to keep it centered
             window.addEventListener('resize', () => updateSlider(true));
+
+            var visiontl =gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".holder",
+                    start: "20% top",
+                    end: "+=500",
+                    toggleActions: "play none none none",
+                    markers: true,
+                }
+            })
+
+            visiontl
+            .fromTo(".holder", {
+                yPercent: 100
+            }, {
+                duration: 0.5,
+                yPercent: 0,
+            })
+            .fromTo(".holder img", {
+                yPercent: 100
+            },
+            {
+                duration: 0.5,
+                yPercent: 0,
+            }, "<");
 
 
 })
