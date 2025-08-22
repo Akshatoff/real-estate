@@ -6,6 +6,11 @@ window.addEventListener("load", () => {
     let about_split = new SplitText("#about-head", {
         type: 'chars'
     })
+    let vision_split = new SplitText("#vision-head", {
+        type: 'chars'
+    })
+
+    let vision_con = document.querySelector(".vision-con")
 
     let about_heading_timeline = gsap.timeline({
         scrollTrigger:{
@@ -237,7 +242,7 @@ const track = document.querySelector('.slider-track');
                     start: "20% top",
                     end: "+=500",
                     toggleActions: "play none none none",
-                    markers: true,
+                    // markers: true,
                 }
             })
 
@@ -255,6 +260,30 @@ const track = document.querySelector('.slider-track');
                 duration: 0.5,
                 yPercent: 0,
             }, "<");
+
+            visiontl.fromTo(
+        vision_split.chars, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
+
+            visiontl.fromTo(
+        vision_con, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
 
 
 })
