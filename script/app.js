@@ -21,6 +21,15 @@ window.addEventListener("load", () => {
         }
     })
 
+    about_sub_div = gsap.timeline({
+        scrollTrigger:{
+            trigger: "#about",
+            start: "bottom top",
+            end: "+=300",
+            // markers: true
+        }
+    })
+
     about_heading_timeline.fromTo(
         about_split.chars, {
             y: 200,
@@ -32,6 +41,19 @@ window.addEventListener("load", () => {
             ease: "power1.inOut",
             stagger: 0.05,
         });
+
+    about_sub_div.fromTo(
+        ".sub-div", {
+            y: 200,
+            opacity: 0,
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            duration: 1,
+
+        })
+
 
     function loadSVG () {
     fetch("./assets/city.svg")
@@ -98,7 +120,7 @@ function setAnimationScroll () {
 let feature_timeline = gsap.timeline({
     scrollTrigger: {
         trigger: "#features",
-        start: "bottom top",
+        start: "75% top",
         end: "+=800",
 
     }
@@ -239,7 +261,7 @@ const track = document.querySelector('.slider-track');
             var visiontl =gsap.timeline({
                 scrollTrigger: {
                     trigger: ".holder",
-                    start: "20% top",
+                    start: "-5% top",
                     end: "+=500",
                     toggleActions: "play none none none",
                     // markers: true,

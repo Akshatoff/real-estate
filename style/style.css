@@ -413,3 +413,17 @@ align-self: center;
     margin-left: 50rem;
 
 }
+
+footer {
+    background-color: #000;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    /*margin-top: 35rem;*/
+}
+
+#footer-head {
+    font-size: 4rem;
+    font-family: "Allenia", sans-serif;
+}
