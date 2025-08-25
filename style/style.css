@@ -127,7 +127,7 @@ main::after {
     font-size: 1.5rem;
     font-family: 'Allenia', sans-serif;
     display: inline-block;
-    margin:0 10rem;
+    margin: 0 10rem;
     position: relative;
     top: 5rem;
 
@@ -137,8 +137,9 @@ main::after {
     display: flex;
     width: 90%;
     margin: 2rem auto;
-gap: 10rem;
+    gap: 10rem;
 }
+
 #about-head {
     font-size: 2.5rem;
     font-family: "Allenia", sans-serif;
@@ -147,13 +148,10 @@ gap: 10rem;
     width: 100rem;
 }
 
-.img-con {
-
-
-}
+.img-con {}
 
 #about-img {
-    width:  100%;
+    width: 100%;
     height: 100%;
 }
 
@@ -182,8 +180,8 @@ gap: 10rem;
     align-self: flex-start;
     padding: 0.5rem 2rem;
     font-weight: 400;
-outline: none;
-border: 2px solid white;
+    outline: none;
+    border: 2px solid white;
     border-radius: 40px;
     transition: all 200ms ease;
 }
@@ -199,6 +197,7 @@ border: 2px solid white;
     .me h2 {
         font-size: 3em;
     }
+
     .banner .title {
         font-size: 3em;
     }
@@ -211,11 +210,13 @@ border: 2px solid white;
         font-size: 2em;
     }
 }
+
 #bg_city {
     width: 100%;
     height: 100vh;
     overflow: hidden;
 }
+
 #bg_city svg {
     width: 100%;
     height: 100%;
@@ -231,7 +232,7 @@ border: 2px solid white;
     width: 80rem;
     gap: 2rem;
     margin: 0 auto;
-    padding-top: 3rem   ;
+    padding-top: 3rem;
 }
 
 .feature-con:nth-child(1) {
@@ -283,6 +284,7 @@ border: 2px solid white;
     font-family: "Poppins", sans-serif;
     font-weight: 200;
 }
+
 .slider-container {
     overflow: hidden;
     width: 100%;
@@ -296,14 +298,14 @@ border: 2px solid white;
     display: flex;
     align-items: center;
     height: 100vh;
-position: absolute;
-top: 0;
-left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 
 }
 
 .slide {
-    transition: transform 0.8s cubic-bezier(0.25, 0.46,0.45,0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform: scale(0.8);
     opacity: 0.4;
     display: flex;
@@ -357,10 +359,7 @@ left: 0;
 
 }
 
-#vision {
-
-
-}
+#vision {}
 
 .wrapper {
     align-self: flex-start;
@@ -387,12 +386,12 @@ left: 0;
 
 #vision-head {
     font-size: 5rem;
-font-family: "Allenia", sans-serif;
-position: absolute;
-z-index: 1;
-margin-top: -50rem;
-width: 40rem;
-margin-left: 30rem;
+    font-family: "Allenia", sans-serif;
+    position: absolute;
+    z-index: 1;
+    margin-top: -50rem;
+    width: 40rem;
+    margin-left: 30rem;
 }
 
 #vision-des {
@@ -403,7 +402,7 @@ margin-left: 30rem;
 }
 
 .vision-con {
-align-self: center;
+    align-self: center;
     justify-self: center;
     width: 25rem;
     display: flex;
@@ -426,4 +425,225 @@ footer {
 #footer-head {
     font-size: 4rem;
     font-family: "Allenia", sans-serif;
+}
+
+
+/*Responsive */
+
+@media screen and (min-width: 1600px) {
+    header {
+        width: 100rem;
+    }
+
+    .subsub {
+        font-size: 1.5rem;
+    }
+
+    .banner .title p {
+        font-size: 7rem;
+    }
+
+    #subhead {
+        font-size: 3rem;
+    }
+
+    #about-head {
+        font-size: 4rem;
+        width: 90rem;
+    }
+
+    #about-des {
+        font-size: 1.2rem;
+    }
+
+    #about-sub {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        padding: 0.8rem 3rem;
+    }
+
+    #features {
+        width: 90rem;
+    }
+
+    #number {
+        font-size: 12rem;
+    }
+
+    .feature-con:nth-child(1) {
+        margin-left: -15rem;
+    }
+
+    .feature-con:nth-child(2) {
+        margin-left: 10rem;
+    }
+
+    #slider-heading {
+        font-family: "Allenia", sans-serif;
+        font-size: 8rem;
+        width: 60rem;
+        text-align: center;
+        position: absolute;
+        z-index: 10;
+        left: 28rem;
+        padding-top: 5rem;
+    }
+
+    .slide {
+        transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform: scale(0.8);
+        opacity: 0.4;
+        display: flex;
+        flex-shrink: 0;
+        width: 650px;
+        height: 90%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .slider-text-container {
+        width: 50rem;
+        margin: 0 40rem;
+        flex-direction: row;
+        display: flex;
+        margin-top: 5rem;
+        gap: 2rem;
+    }
+
+    .holder {
+        width: 60rem;
+    }
+
+    #vision-head {
+        font-size: 7rem;
+        font-family: "Allenia", sans-serif;
+        position: absolute;
+        z-index: 1;
+        margin-top: -60rem;
+        width: 60rem;
+        margin-left: 40rem;
+
+    }
+
+    .vision-con {
+        align-self: center;
+        justify-self: center;
+        width: 35rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: -25rem;
+        margin-left: 70rem;
+    }
+
+    #vision-des {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    header {
+        display: none;
+    }
+
+    #subhead {
+        margin: 0 2rem;
+    }
+
+    .division {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    #about {
+        height: min-content;
+
+    }
+
+    #about-head {
+        font-size: 2.5rem;
+        font-family: "Allenia", sans-serif;
+        margin-top: 5rem;
+        font-style: italic;
+        text-align: center;
+        width: 20rem;
+    }
+
+    #about-des {
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        width: 20rem;
+    }
+
+    #learn {
+        align-self: center;
+    }
+
+    #features {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding-top: 10rem;
+        height: min-content;
+        padding-bottom: 2rem;
+    }
+
+    .feature-con:nth-child(1) {
+        margin-left: 0;
+    }
+
+    .feature-con:nth-child(2) {
+        margin-left: 5rem;
+    }
+
+    .feature-con:nth-child(3) {
+        margin-left: -4rem;
+    }
+
+    #slider {
+        width: 100%;
+        height: min-content;
+        padding-bottom: 2rem;
+    }
+
+    .slide {
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0.4;
+    display: flex;
+    flex-shrink: 0;
+    width: 350px;
+    height: 90%;
+    padding-left: 20px;
+    padding-right: 20px;
+    }
+    #slider-heading {
+        font-family: "Allenia", sans-serif;
+    font-size: 4rem;
+    width: 20rem;
+    text-align: center;
+    position: absolute;
+    z-index: 10;
+    left: 0.5rem;
+    margin-top:-10rem    }
+
+    #slider-des {
+        align-self: flex-start;
+        width: 20rem;
+    }
+    .slider-text-container {
+        width: 25rem;
+    margin: 0 2rem;
+    flex-direction: column;
+    display: flex
+;
+    margin-top: -10rem;
+    gap: 2rem;
+    }
 }
