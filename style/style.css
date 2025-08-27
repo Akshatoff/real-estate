@@ -549,6 +549,10 @@ footer {
         display: none;
     }
 
+    .banner {
+        height: 120rem;
+    }
+
     #subhead {
         margin: 0 2rem;
     }
@@ -560,7 +564,7 @@ footer {
 
     #about {
         height: min-content;
-
+        margin-top: -65rem;
     }
 
     #about-head {
