@@ -1,6 +1,9 @@
+
+
 window.addEventListener("load", () => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
-    let aboutheading = document.getElementById("#about-head");
+
+     let aboutheading = document.getElementById("#about-head");
     let elements = document.getElementsByClassName("feature-con");
     console.log(elements)
     let about_split = new SplitText("#about-head", {
@@ -12,7 +15,119 @@ window.addEventListener("load", () => {
 
     let vision_con = document.querySelector(".vision-con")
 
-    let about_heading_timeline = gsap.timeline({
+    if (window.innerWidth >= 300) {
+        let about_heading_timeline = gsap.timeline({
+        scrollTrigger:{
+            trigger: "#about",
+            start: "-100% top",
+            end: "+=300",
+            // markers: true
+        }
+    })
+
+    let about_sub_div = gsap.timeline({
+        scrollTrigger:{
+            trigger: "#about",
+            start: "-100% top",
+            end: "+=300",
+            // markers: true
+        }
+    })
+
+    about_heading_timeline.fromTo(
+        about_split.chars, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
+
+    about_sub_div.fromTo(
+        ".sub-div", {
+            y: 200,
+            opacity: 0,
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            duration: 1,
+
+        })
+
+    let feature_timeline = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#features",
+        start: "-125% top",
+        end: "+=800",
+
+    }
+})
+
+feature_timeline.fromTo(
+    elements,{
+        y: -200,
+        opacity: 0
+    },{
+        y: 0,
+        opacity: 1,
+    })
+
+var visiontl =gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".holder",
+                    start: "-195% top",
+                    end: "+=500",
+                    toggleActions: "play none none none",
+                    // markers: true,
+                }
+            })
+
+            visiontl
+            .fromTo(".holder", {
+                yPercent: 100
+            }, {
+                duration: 0.5,
+                yPercent: 0,
+            })
+            .fromTo(".holder img", {
+                yPercent: 100
+            },
+            {
+                duration: 0.5,
+                yPercent: 0,
+            }, "<");
+
+            visiontl.fromTo(
+        vision_split.chars, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
+
+            visiontl.fromTo(
+        vision_con, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
+
+    }
+    else {
+        let about_heading_timeline = gsap.timeline({
         scrollTrigger:{
             trigger: "#about",
             start: "bottom top",
@@ -21,7 +136,7 @@ window.addEventListener("load", () => {
         }
     })
 
-    about_sub_div = gsap.timeline({
+    let about_sub_div = gsap.timeline({
         scrollTrigger:{
             trigger: "#about",
             start: "bottom top",
@@ -53,6 +168,80 @@ window.addEventListener("load", () => {
             duration: 1,
 
         })
+
+    let feature_timeline = gsap.timeline({
+    scrollTrigger: {
+        trigger: "#features",
+        start: "75% top",
+        end: "+=800",
+
+    }
+})
+
+feature_timeline.fromTo(
+    elements,{
+        y: -200,
+        opacity: 0
+    },{
+        y: 0,
+        opacity: 1,
+    })
+
+var visiontl =gsap.timeline({
+                scrollTrigger: {
+                    trigger: ".holder",
+                    start: "-5% top",
+                    end: "+=500",
+                    toggleActions: "play none none none",
+                    // markers: true,
+                }
+            })
+
+            visiontl
+            .fromTo(".holder", {
+                yPercent: 100
+            }, {
+                duration: 0.5,
+                yPercent: 0,
+            })
+            .fromTo(".holder img", {
+                yPercent: 100
+            },
+            {
+                duration: 0.5,
+                yPercent: 0,
+            }, "<");
+
+            visiontl.fromTo(
+        vision_split.chars, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
+
+            visiontl.fromTo(
+        vision_con, {
+            y: 200,
+            opacity: 0,
+
+        }, {
+            y: 0,
+            opacity: 1,
+            ease: "power1.inOut",
+            stagger: 0.05,
+        });
+
+
+    }
+
+
+
+
 
 
     function loadSVG () {
@@ -117,23 +306,7 @@ function setAnimationScroll () {
     ]);
 }
 
-let feature_timeline = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#features",
-        start: "75% top",
-        end: "+=800",
 
-    }
-})
-
-feature_timeline.fromTo(
-    elements,{
-        y: -200,
-        opacity: 0
-    },{
-        y: 0,
-        opacity: 1,
-    })
 
 const track = document.querySelector('.slider-track');
             if (!track) return;
@@ -258,54 +431,6 @@ const track = document.querySelector('.slider-track');
             // Recalculate on window resize to keep it centered
             window.addEventListener('resize', () => updateSlider(true));
 
-            var visiontl =gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".holder",
-                    start: "-5% top",
-                    end: "+=500",
-                    toggleActions: "play none none none",
-                    // markers: true,
-                }
-            })
-
-            visiontl
-            .fromTo(".holder", {
-                yPercent: 100
-            }, {
-                duration: 0.5,
-                yPercent: 0,
-            })
-            .fromTo(".holder img", {
-                yPercent: 100
-            },
-            {
-                duration: 0.5,
-                yPercent: 0,
-            }, "<");
-
-            visiontl.fromTo(
-        vision_split.chars, {
-            y: 200,
-            opacity: 0,
-
-        }, {
-            y: 0,
-            opacity: 1,
-            ease: "power1.inOut",
-            stagger: 0.05,
-        });
-
-            visiontl.fromTo(
-        vision_con, {
-            y: 200,
-            opacity: 0,
-
-        }, {
-            y: 0,
-            opacity: 1,
-            ease: "power1.inOut",
-            stagger: 0.05,
-        });
 
 
 })
