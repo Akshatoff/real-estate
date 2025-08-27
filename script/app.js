@@ -19,16 +19,16 @@ window.addEventListener("load", () => {
         let about_heading_timeline = gsap.timeline({
         scrollTrigger:{
             trigger: "#about",
-            start: "-100% top",
+            start: "bottom top",
             end: "+=300",
-            // markers: true
+
         }
     })
 
     let about_sub_div = gsap.timeline({
         scrollTrigger:{
             trigger: "#about",
-            start: "-100% top",
+            start: "bottom top",
             end: "+=300",
             // markers: true
         }
@@ -61,7 +61,7 @@ window.addEventListener("load", () => {
     let feature_timeline = gsap.timeline({
     scrollTrigger: {
         trigger: "#features",
-        start: "-125% top",
+        start: "75% top",
         end: "+=800",
 
     }
@@ -79,7 +79,7 @@ feature_timeline.fromTo(
 var visiontl =gsap.timeline({
                 scrollTrigger: {
                     trigger: ".holder",
-                    start: "-195% top",
+                    start: "-5% top",
                     end: "+=500",
                     toggleActions: "play none none none",
                     // markers: true,
