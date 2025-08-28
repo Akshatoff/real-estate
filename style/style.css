@@ -679,11 +679,12 @@ footer {
             align-self: center;
     justify-self: center;
     width: 20rem;
-    display: flex
-;
+    display: flex;
     flex-direction: column;
     gap: 2rem;
     margin-top: 1rem;
     margin-left: 2rem;
     }
+
+
 }

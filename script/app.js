@@ -1,336 +1,218 @@
-
-
 window.addEventListener("load", () => {
     gsap.registerPlugin(ScrollTrigger, SplitText);
 
-     let aboutheading = document.getElementById("#about-head");
-    let elements = document.getElementsByClassName("feature-con");
-    console.log(elements)
-    let about_split = new SplitText("#about-head", {
-        type: 'chars'
-    })
-    let vision_split = new SplitText("#vision-head", {
-        type: 'chars'
-    })
-
-    let vision_con = document.querySelector(".vision-con")
-
-    if (window.innerWidth >= 300) {
-
-
+    // --- Detect desktop ---
+    function isDesktop() {
+        return window.matchMedia("(min-width: 1024px)").matches;
     }
-    else {
-        let about_heading_timeline = gsap.timeline({
-        scrollTrigger:{
-            trigger: "#about",
-            start: "bottom top",
-            end: "+=300",
-            // scrub: true,
-        }
-    })
 
-    let about_sub_div = gsap.timeline({
-        scrollTrigger:{
-            trigger: "#about",
-            start: "bottom top",
-            end: "+=300",
-            // markers: true
-        }
-    })
+    // FIX: Call the function with parentheses
+    if (isDesktop()) {
+        // ===============================
+        // DESKTOP ONLY: GSAP Animations
+        // ===============================
 
-    about_heading_timeline.fromTo(
-        about_split.chars, {
-            y: 200,
-            opacity: 0,
+        console.log("Desktop detected – GSAP animations enabled.");
 
-        }, {
-            y: 0,
-            opacity: 1,
-            ease: "power1.inOut",
-            stagger: 0.05,
+        let about_split = new SplitText("#about-head", { type: 'chars' });
+        let vision_split = new SplitText("#vision-head", { type: 'chars' });
+        let vision_con = document.querySelector(".vision-con");
+        let elements = document.getElementsByClassName("feature-con");
+
+        // About heading animation
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#about",
+                start: "bottom top",
+                end: "+=300",
+            }
+        }).fromTo(
+            about_split.chars,
+            { y: 200, opacity: 0 },
+            { y: 0, opacity: 1, ease: "power1.inOut", stagger: 0.05 }
+        );
+
+        // About sub-div animation
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#about",
+                start: "bottom top",
+                end: "+=300",
+            }
+        }).fromTo(".sub-div",
+            { y: 200, opacity: 0 },
+            { y: 0, opacity: 1, ease: "power1.inOut", duration: 1 }
+        );
+
+        // Features animation
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: "#features",
+                start: "75% top",
+                end: "+=800",
+            }
+        }).fromTo(elements,
+            { y: -200, opacity: 0 },
+            { y: 0, opacity: 1 }
+        );
+
+        // Vision animation
+        let visiontl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".holder",
+                start: "-5% top",
+                end: "+=500",
+                toggleActions: "play none none none",
+            }
         });
 
-    about_sub_div.fromTo(
-        ".sub-div", {
-            y: 200,
-            opacity: 0,
-        }, {
-            y: 0,
-            opacity: 1,
-            ease: "power1.inOut",
-            duration: 1,
-
-        })
-
-    let feature_timeline = gsap.timeline({
-    scrollTrigger: {
-        trigger: "#features",
-        start: "75% top",
-        end: "+=800",
+        visiontl
+            .fromTo(".holder", { yPercent: 100 }, { duration: 0.5, yPercent: 0 })
+            .fromTo(".holder img", { yPercent: 100 }, { duration: 0.5, yPercent: 0 }, "<")
+            .fromTo(vision_split.chars, { y: 200, opacity: 0 },
+                                   { y: 0, opacity: 1, ease: "power1.inOut", stagger: 0.05 })
+            .fromTo(vision_con, { y: 200, opacity: 0 },
+                                 { y: 0, opacity: 1, ease: "power1.inOut", stagger: 0.05 });
 
     }
-})
 
-feature_timeline.fromTo(
-    elements,{
-        y: -200,
-        opacity: 0
-    },{
-        y: 0,
-        opacity: 1,
-    })
+    // =========================
+    // SVG LOADING: Works on both mobile & desktop
+    // =========================
+    function loadSVG() {
+        fetch("./assets/city.svg")
+            .then((response) => response.text())
+            .then((svg) => {
+                document.getElementById('bg_city').innerHTML = svg;
+                document.querySelector('#bg_city svg')
+                    .setAttribute("preserveAspectRatio", "xMidYMid slice");
 
-var visiontl =gsap.timeline({
-                scrollTrigger: {
-                    trigger: ".holder",
-                    start: "-5% top",
-                    end: "+=500",
-                    toggleActions: "play none none none",
-                    // markers: true,
+                // Only run animations on desktop
+                if (isDesktop()) {
+                    setAnimationScroll();
                 }
-            })
-
-            visiontl
-            .fromTo(".holder", {
-                yPercent: 100
-            }, {
-                duration: 0.5,
-                yPercent: 0,
-            })
-            .fromTo(".holder img", {
-                yPercent: 100
-            },
-            {
-                duration: 0.5,
-                yPercent: 0,
-            }, "<");
-
-            visiontl.fromTo(
-        vision_split.chars, {
-            y: 200,
-            opacity: 0,
-
-        }, {
-            y: 0,
-            opacity: 1,
-            ease: "power1.inOut",
-            stagger: 0.05,
-        });
-
-            visiontl.fromTo(
-        vision_con, {
-            y: 200,
-            opacity: 0,
-
-        }, {
-            y: 0,
-            opacity: 1,
-            ease: "power1.inOut",
-            stagger: 0.05,
-        });
-
-
+            });
     }
 
+    // Desktop-only animation function
+    function setAnimationScroll() {
+        let runAnimation = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#bg_city",
+                start: "top top",
+                end: "+=1000",
+                scrub: true,
+                pin: true
+            }
+        });
 
+        runAnimation.add([
+            gsap.to("#bg_city svg", { duration: 2, scale: 1.5 }),
+            gsap.to("#full_city", { duration: 2, opacity: 0 })
+        ])
+        .add([
+            gsap.to("#building_top", { duration: 2, y: -200, opacity: 0 }),
+            gsap.to("#wall_side", { duration: 2, x: -200, opacity: 0 }),
+            gsap.to("#wall_front", { duration: 2, x: 200, y: 200, opacity: 0 })
+        ])
+        .add([
+            gsap.to("#interior_wall_side", { duration: 2, x: -200, opacity: 0 }),
+            gsap.to("#interior_wall_top", { duration: 2, y: -200, opacity: 0 }),
+            gsap.to("#interior_wall_side_2", { duration: 2, opacity: 0 }),
+            gsap.to("#interior_wall_front", { duration: 2, opacity: 0 })
+        ]);
+    }
 
+    // Load SVG for both mobile and desktop
+    loadSVG();
 
+    // =========================
+    // SLIDER: Works on both mobile & desktop
+    // =========================
+    const track = document.querySelector('.slider-track');
+    if (!track) return;
 
+    const slideInterval = 3000;
+    let slides = Array.from(track.children);
+    const originalSlideCount = slides.length;
+    let currentIndex = 0;
+    let intervalId = null;
 
-    function loadSVG () {
-    fetch("./assets/city.svg")
-    .then((response) => { return response.text();})
-    .then((svg) => {
-        document.getElementById('bg_city').innerHTML = svg;
-        document.querySelector('#bg_city svg').setAttribute("preserveAspectRatio", "xMidYMid slice");
-        setAnimationScroll();
-    })
-}
-loadSVG();
-function setAnimationScroll () {
+    const cloneCount = 2;
+    for (let i = 0; i < cloneCount; i++) {
+        const clone = slides[originalSlideCount - 1 - i].cloneNode(true);
+        track.insertBefore(clone, slides[0]);
+    }
+    for (let i = 0; i < cloneCount; i++) {
+        const clone = slides[i].cloneNode(true);
+        track.appendChild(clone);
+    }
 
-    let runAnimation = gsap.timeline({
-        scrollTrigger: {
-            trigger: "#bg_city",
-            start: "top top",
-            end: "+=1000",
-            scrub: true,
-            pin: true
+    slides = Array.from(track.children);
+    currentIndex = cloneCount;
+
+    function updateSlider(instant = false) {
+        if (instant) {
+            track.style.transition = 'none';
+        } else {
+            track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
         }
-    });
 
-    runAnimation.add([
-        gsap.to("#bg_city svg", 2, {
-            scale: 1.5
-        }),
-        gsap.to("#full_city", 2, {
-            opacity: 0
-        })
-    ])
-    .add([
-        gsap.to("#building_top", 2, {
-            y: -200,
-            opacity: 0
-        }),
-        gsap.to("#wall_side", 2, {
-            x: -200,
-            opacity: 0
-        }),
-        gsap.to("#wall_front", 2, {
-            x: 200, y: 200,
-            opacity: 0
-        })
-    ])
-    .add([
-        gsap.to("#interior_wall_side", 2, {
-            x: -200,
-            opacity: 0
-        }),
-        gsap.to("#interior_wall_top", 2, {
-            y: -200,
-            opacity: 0
-        }),
-        gsap.to("#interior_wall_side_2", 2, {
-            opacity: 0
-        }),
-        gsap.to("#interior_wall_front", 2, {
-            opacity: 0
-        })
-    ]);
-}
+        const container = document.querySelector('.slider-container');
+        const currentSlideElement = slides[currentIndex];
+        const containerCenter = container.offsetWidth / 2;
+        const slideCenter = currentSlideElement.offsetLeft + currentSlideElement.offsetWidth / 2;
+        const offset = containerCenter - slideCenter;
 
+        track.style.transform = `translateX(${offset}px)`;
 
+        slides.forEach((slide, index) => {
+            slide.classList.toggle('active', index === currentIndex);
+        });
 
-const track = document.querySelector('.slider-track');
-            if (!track) return;
+        if (instant) {
+            setTimeout(() => {
+                track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }, 50);
+        }
+    }
 
-            // --- Configuration ---
-            const slideInterval = 3000; // Time in ms for auto-sliding
+    function moveToNext() {
+        currentIndex++;
+        updateSlider();
+        track.addEventListener('transitionend', checkLoop, { once: true });
+    }
 
-            // --- State ---
-            let slides = Array.from(track.children);
-            const originalSlideCount = slides.length;
-            let currentIndex = 0;
-            let intervalId = null;
-
-            // --- Setup for Infinite Loop ---
-            // To create a seamless loop, we clone the first and last slides
-            // and add them to the beginning and end of the track.
-            const cloneCount = 2; // Number of slides to clone on each side for smooth looping
-
-            // Clone last slides and prepend them
-            for (let i = 0; i < cloneCount; i++) {
-                const clone = slides[originalSlideCount - 1 - i].cloneNode(true);
-                track.insertBefore(clone, slides[0]);
-            }
-            // Clone first slides and append them
-            for (let i = 0; i < cloneCount; i++) {
-                const clone = slides[i].cloneNode(true);
-                track.appendChild(clone);
-            }
-
-            // Update slides array and set the initial position to the first "real" slide
-            slides = Array.from(track.children);
+    function checkLoop() {
+        if (currentIndex >= originalSlideCount + cloneCount) {
             currentIndex = cloneCount;
-
-            /**
-             * Updates the slider's position and active slide styles.
-             * @param {boolean} instant - If true, the transition is immediate (no animation).
-             */
-            function updateSlider(instant = false) {
-                // Temporarily disable transition for instant updates
-                if (instant) {
-                    track.style.transition = 'none';
-                } else {
-                    track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                }
-
-                // Calculate the offset needed to center the current slide
-                const container = document.querySelector('.slider-container');
-                const currentSlideElement = slides[currentIndex];
-                const containerCenter = container.offsetWidth / 2;
-                const slideCenter = currentSlideElement.offsetLeft + currentSlideElement.offsetWidth / 2;
-                const offset = containerCenter - slideCenter;
-
-                // Apply the transform to move the track
-                track.style.transform = `translateX(${offset}px)`;
-
-                // Update the 'active' class on slides
-                slides.forEach((slide, index) => {
-                    slide.classList.toggle('active', index === currentIndex);
-                });
-
-                // Re-enable transition after an instant update
-                if (instant) {
-                    // A tiny delay is needed for the browser to apply the 'none' transition
-                    // before re-enabling it.
-                    setTimeout(() => {
-                        track.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    }, 50);
-                }
-            }
-
-            /**
-             * Moves to the next slide in the sequence.
-             */
-            function moveToNext() {
-                currentIndex++;
-                updateSlider();
-
-                // Listen for the end of the transition to handle the loop "jump"
-                track.addEventListener('transitionend', checkLoop, { once: true });
-            }
-
-            /**
-             * Checks if the slider is on a cloned slide and jumps to the
-             * corresponding real slide without animation.
-             */
-            function checkLoop() {
-                 // Jump to the start if we've hit the cloned slides at the end
-                if (currentIndex >= originalSlideCount + cloneCount) {
-                    currentIndex = cloneCount;
-                    updateSlider(true); // Instant jump
-                }
-                // Jump to the end if we've hit the cloned slides at the beginning (not used in auto-next, but useful for prev buttons)
-                if (currentIndex < cloneCount) {
-                    currentIndex = originalSlideCount + cloneCount -1;
-                    updateSlider(true); // Instant jump
-                }
-            }
-
-            /**
-             * Starts the automatic sliding.
-             */
-            function startAutoplay() {
-                stopAutoplay(); // Ensure no multiple intervals are running
-                intervalId = setInterval(moveToNext, slideInterval);
-            }
-
-            /**
-             * Stops the automatic sliding.
-             */
-            function stopAutoplay() {
-                clearInterval(intervalId);
-            }
-
-            // Initial setup
             updateSlider(true);
-            startAutoplay();
+        }
+        if (currentIndex < cloneCount) {
+            currentIndex = originalSlideCount + cloneCount - 1;
+            updateSlider(true);
+        }
+    }
 
-            // Optional: Pause on hover
-            track.addEventListener('mouseenter', stopAutoplay);
-            track.addEventListener('mouseleave', startAutoplay);
+    function startAutoplay() {
+        stopAutoplay();
+        intervalId = setInterval(moveToNext, slideInterval);
+    }
 
-            // Recalculate on window resize to keep it centered
-            window.addEventListener('resize', () => updateSlider(true));
+    function stopAutoplay() {
+        clearInterval(intervalId);
+    }
 
+    updateSlider(true);
+    startAutoplay();
 
+    track.addEventListener('mouseenter', stopAutoplay);
+    track.addEventListener('mouseleave', startAutoplay);
 
-})
+    window.addEventListener('resize', () => updateSlider(true));
+});
 
-
-
-// Initialize Lenis
+// Initialize Lenis (Note: This should probably be inside the desktop check above)
 const lenis = new Lenis({
   autoRaf: true,
 });
